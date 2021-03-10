@@ -56,15 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void like(int index) {
+  void favorite(int index) {
     setState(() {
       var image = images.removeAt(index);
       favorites.add(image);
     });
   }
 
-  void dislike(int index) {
-    print("dislike");
+  void skip(int index) {
     setState(() {
       images.removeAt(index);
     });
@@ -76,13 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: IndexedStack(
-        index: pageIndex,
-        children: [
-          CardStackPage(images),
-          FavoritesPage(favorites),
-        ],
-      ),
+      body: pageIndex == 0
+          ? CardStackPage(images)
+          : FavoritesPage(favorites),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
         onTap: (index) {
@@ -98,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             label: "Favorites",
             icon: Icon(Icons.favorite),
-          )
+          ),
         ],
       ),
     );
@@ -118,13 +113,14 @@ class CardStackPage extends StatelessWidget {
           Container(
             height: 600,
             child: SwipeStack(
-              children: images.map((i) {
+              children: images.map((image) {
                 return SwiperItem(builder: (position, progress) {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      i["url"],
+                      image["url"],
                       width: double.infinity,
+                      height: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   );
@@ -132,9 +128,9 @@ class CardStackPage extends StatelessWidget {
               }).toList(),
               onSwipe: (index, position) {
                 if (position == SwiperPosition.Right) {
-                  MyHomePage.of(context).like(index);
+                  MyHomePage.of(context).favorite(index);
                 } else if (position == SwiperPosition.Left) {
-                  MyHomePage.of(context).dislike(index);
+                  MyHomePage.of(context).skip(index);
                 }
               },
             ),
@@ -148,7 +144,7 @@ class CardStackPage extends StatelessWidget {
                   color: Colors.red,
                   icon: Icon(Icons.close),
                   onPressed: () {
-                    MyHomePage.of(context).dislike(images.length - 1);
+                    MyHomePage.of(context).skip(images.length - 1);
                   },
                 ),
               ),
@@ -158,7 +154,7 @@ class CardStackPage extends StatelessWidget {
                   color: Colors.green,
                   icon: Icon(Icons.check),
                   onPressed: () {
-                    MyHomePage.of(context).like(images.length - 1);
+                    MyHomePage.of(context).favorite(images.length - 1);
                   },
                 ),
               ),

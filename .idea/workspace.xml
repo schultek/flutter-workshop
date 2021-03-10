@@ -3,12 +3,34 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a092dfd-c72f-4f74-8e3b-b1ad9e59dad0" name="Default Changelist" comment="" />
+    <list default="true" id="2a092dfd-c72f-4f74-8e3b-b1ad9e59dad0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/catinder/snippets.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FlutterWorkshop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlutterWorkshop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/lib/main.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -21,6 +43,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -45,5 +68,38 @@
       <updated>1615130072035</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1398" height="118" key="GridCell.Tab.0.bottom" timestamp="1615132131734">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1878" height="305" key="GridCell.Tab.0.bottom/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222591" />
+    <state width="1398" height="118" key="GridCell.Tab.0.bottom/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131734" />
+    <state width="1398" height="118" key="GridCell.Tab.0.center" timestamp="1615132131727">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1878" height="305" key="GridCell.Tab.0.center/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222589" />
+    <state width="1398" height="118" key="GridCell.Tab.0.center/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131727" />
+    <state width="1398" height="118" key="GridCell.Tab.0.left" timestamp="1615132131725">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1878" height="305" key="GridCell.Tab.0.left/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222586" />
+    <state width="1398" height="118" key="GridCell.Tab.0.left/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131725" />
+    <state width="1398" height="118" key="GridCell.Tab.0.right" timestamp="1615132131730">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1878" height="305" key="GridCell.Tab.0.right/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222590" />
+    <state width="1398" height="118" key="GridCell.Tab.0.right/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131730" />
   </component>
 </project>
