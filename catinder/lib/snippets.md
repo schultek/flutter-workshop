@@ -22,6 +22,8 @@ Open myapp folder
 
 Run app
 
+Enable KeyCastr (Option, CMD, K)
+
 # Vysor
 
 Switch to myapp
@@ -62,12 +64,11 @@ scaffoldBackgroundColor: Colors.grey.shade300,
 body: Placeholder(),
 
 bottomNavigationBar: BottomNavigationBar(
-  
+  items: [
+    // cats
+    // favorites
+  ],
 ),
-
-items: [
-  
-],
 
 BottomNavigationBarItem(
   label: "Cats",
@@ -122,7 +123,7 @@ get(
   Uri.parse("https://api.thecatapi.com/v1/images/search?format=json&mime_types=jpg&limit=100"),
   headers: {"x-api-key": "0e9baaca-e7a5-435f-bcef-62505b79f53c"},
 ).then((result) {
-
+  // TODO parse result into images
 });
 
 List<dynamic> catImages = jsonDecode(result.body);
@@ -131,7 +132,7 @@ setState(() {
 });
 
 children: images.map((image) {
-          
+  // TODO return image widget        
 }).toList(),
 
 return SwiperItem(builder: (position, progress) {
@@ -154,9 +155,9 @@ onSwipe: (index, position) {
 },
 
 if (position == SwiperPosition.Right) {
-  
+  // TODO favorite image
 } else if (position == SwiperPosition.Left) {
-  
+  // TODO discard image
 }
 
 List<dynamic> favorites = [];
