@@ -109,7 +109,11 @@ import 'package:http/http.dart' as http;
 const OPENAI_KEY = "YOUR API KEY HERE";
 
 String.fromEnvironment("OPENAI_KEY");
-[RUN ARGS] --dart-define=OPENAI_KEY=${OPENAI_KEY}
+
+[RUN ARGS] --dart-define=OPENAI_KEY=
+${OPENAI_KEY}
+
+flutter run --dart-define=OPENAI_KEY=MY_KEY
 
 [Rerun Application]
 

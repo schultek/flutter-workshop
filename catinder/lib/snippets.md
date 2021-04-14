@@ -84,10 +84,12 @@ int pageIndex = 0;
 
 currentIndex: pageIndex,
 onTap: (index) {
-  setState(() {
-    pageIndex = index;
-  });
+  
 },
+
+setState(() {
+  pageIndex = index;
+});
 
 body: Text("$pageIndex"),
 
