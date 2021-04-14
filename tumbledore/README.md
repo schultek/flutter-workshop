@@ -14,3 +14,14 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Add your OpenAI Key
+
+Run your app with `flutter run --dart-define=OPENAI_KEY=YOUR_API_KEY_HERE`
+
+> In Android Studio, go to the top toolbar, click on main.dart > 'Edit Configurations' and set 'Additional run args' to '--dart-define=OPENAI_KEY=YOUR_API_KEY_HERE'
+
+Build your app
+- for Web with `flutter build web --dart-define=OPENAI_KEY=YOUR_API_KEY_HERE` 
+- for Android with `flutter build apk --dart-define=OPENAI_KEY=YOUR_API_KEY_HERE`
+

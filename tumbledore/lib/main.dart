@@ -90,9 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
     var result = await http.post(
       Uri.parse("https://api.openai.com/v1/engines/davinci/completions"),
       headers: {
-        HttpHeaders.authorizationHeader: "Bearer $OPENAI_KEY",
-        HttpHeaders.acceptHeader: "application/json",
-        HttpHeaders.contentTypeHeader: "application/json",
+        "Authorization": "Bearer $OPENAI_KEY",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
       },
       body: jsonEncode({
         "prompt": prompt,
@@ -166,7 +166,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Theme.of(context).primaryColor,
                   ),
                   onPressed: () {
-                    FocusScope.of(context).unfocus();
                     sendMessage(textEditingController.text);
                   },
                 ),

@@ -134,9 +134,9 @@ var result = await http.post(
 Uri.parse("https://api.openai.com/v1/engines/davinci/completions"),
 
 headers: {
-  HttpHeaders.authorizationHeader: "Bearer $OPENAI_KEY",
-  HttpHeaders.acceptHeader: "application/json",
-  HttpHeaders.contentTypeHeader: "application/json",
+  "Authorization": "Bearer $OPENAI_KEY",
+  "Accept": "application/json",
+  "Content-Type": "application/json",
 },
 
 body: jsonEncode({
@@ -164,7 +164,7 @@ var textEditingController = TextEditingController();
 
 controller: textEditingController,
 
-if (question == "") {
+if (message == "") {
   return;
 }
 
@@ -211,9 +211,9 @@ messages.map((message) {
 
 }).toList(),
 
-Bubble(
+return Bubble(
   child: Text(message.text),
-),
+);
 
 color: message.byMe ? Colors.orange.shade300 : Colors.grey.shade300,
 
@@ -246,8 +246,6 @@ onPressed: () {
 
 sendMessage(textEditingController.text);
 
-FocusScope.of(context).unfocus();
-
 # Scroll To Bottom
 
 reverse: true,
@@ -256,4 +254,4 @@ messages.reversed
 
 # END
 
-flutter build apk
+flutter build apk --dart-define=OPENAI_KEY=MY_KEY
