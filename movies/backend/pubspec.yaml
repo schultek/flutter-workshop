@@ -1,4 +1,4 @@
-name: backend
+name: movies_backend
 description: A server app using the shelf package and Docker.
 version: 1.0.0
 # homepage: https://www.example.com
@@ -11,6 +11,8 @@ dependencies:
   args: ^2.0.0
   shelf: ^1.1.0
   shelf_router: ^1.0.0
+  movies_shared:
+    path: ../shared
 
 dev_dependencies:
   http: ^0.13.0
