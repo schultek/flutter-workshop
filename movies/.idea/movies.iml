@@ -6,6 +6,12 @@
       <excludeFolder url="file://$MODULE_DIR$/app/build" />
       <excludeFolder url="file://$MODULE_DIR$/app/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/build" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/build" />
+      <excludeFolder url="file://$MODULE_DIR$/shared/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
