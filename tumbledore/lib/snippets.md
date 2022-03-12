@@ -254,4 +254,8 @@ messages.reversed
 
 # END
 
+flutter run -d chrome --dart-define=OPENAI_KEY=MY_KEY
+
+flutter build web --dart-define=OPENAI_KEY=MY_KEY
+
 flutter build apk --dart-define=OPENAI_KEY=MY_KEY
