@@ -146,6 +146,7 @@ class AddReviewPopup extends StatefulWidget {
   final Movie? existingMovie;
 
   const AddReviewPopup({this.existingMovie, Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _AddReviewPopupState();
 }
@@ -168,11 +169,38 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Add a new movie review!'),
-      content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return SimpleDialog(
+      contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+      titlePadding: EdgeInsets.zero,
+      title: Container(
+        padding: EdgeInsets.all(20),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        child: Text(
+          'Add a new movie review!',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      children: [
         widget.existingMovie == null
             ? TextField(
+                decoration: InputDecoration(
+                  hintText: "Title",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                ),
                 onChanged: (val) {
                   name = val.isEmpty ? null : val;
                   _checkAllFieldsFilled();
@@ -185,63 +213,89 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-        widget.existingMovie == null
-            ? TextField(
-                onChanged: (val) {
-                  genre = val.isEmpty ? null : val;
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+          ),
+          child: widget.existingMovie == null
+              ? TextField(
+                  onChanged: (val) {
+                    genre = val.isEmpty ? null : val;
+                    _checkAllFieldsFilled();
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Genre",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                  ),
+                )
+              : Text(
+                  genre!,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 20,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Rating"),
+              RatingBar.builder(
+                itemSize: 30,
+                allowHalfRating: false,
+                initialRating: 0,
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (double value) {
+                  rating = value.round();
                   _checkAllFieldsFilled();
                 },
-              )
-            : Text(
-                genre!,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
               ),
-        RatingBar.builder(
-          itemSize: 30,
-          allowHalfRating: true,
-          initialRating: 0,
-          itemBuilder: (context, _) => const Icon(
-            Icons.star,
-            color: Colors.amber,
+            ],
           ),
-          onRatingUpdate: (double value) {
-            rating = value.round();
-            _checkAllFieldsFilled();
-          },
         ),
-      ]),
-      actions: <Widget>[
-        ElevatedButton(
-          onPressed: allFieldsFilled
-              ? () {
-                  if (widget.existingMovie == null) {
-                    Navigator.of(context).pop(Movie.fromMap({
-                      "name": name,
-                      "genre": genre,
-                      "id": const Uuid().v4(),
-                      "ratings": [
-                        {"rating": rating, "author": "me"},
-                      ]
-                    }));
-                  } else {
-                    Navigator.of(context).pop(
-                      MovieRating.fromMap(
-                        {"rating": rating, "author": "me"},
-                      ),
-                    );
-                  }
-                }
-              : null,
-          child: const Text('Save'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Cancel'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: allFieldsFilled
+                  ? () {
+                      if (widget.existingMovie == null) {
+                        Navigator.of(context).pop(Movie.fromMap({
+                          "name": name,
+                          "genre": genre,
+                          "id": const Uuid().v4(),
+                          "ratings": [
+                            {"rating": rating, "author": "me"},
+                          ]
+                        }));
+                      } else {
+                        Navigator.of(context).pop(
+                          MovieRating.fromMap(
+                            {"rating": rating, "author": "me"},
+                          ),
+                        );
+                      }
+                    }
+                  : null,
+              child: const Text('Save'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
         ),
       ],
     );
