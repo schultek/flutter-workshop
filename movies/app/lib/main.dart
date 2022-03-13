@@ -31,17 +31,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var computerIP = "http://192.168.0.7:8080/";
+  List<Movie> movies = [];
+
   void _addReview() async {
     Movie movie = Movie("test1", "thriller", [MovieRating(3, "me")]);
-    var url = Uri.parse('http://localhost:8080/movie');
-    var response = await http.post(url, body: jsonEncode(movie.toMap()));
+    var url = Uri.parse(computerIP + 'movie');
+    await http.post(url, body: jsonEncode(movie.toMap()));
+    await _loadMovies();
     print("add review");
   }
 
-  List<Movie> movies = [
-    Movie("Fast and Furious", "Drama", [MovieRating(4, "x"), MovieRating(2, "x")]),
-    Movie("Fast and Furious 2", "Drama", [MovieRating(0, "x"), MovieRating(5, "x")]),
-  ];
+  Future<void> _loadMovies() async {
+    print("loaded movies");
+    var url = Uri.parse(computerIP + 'movies');
+    movies = (jsonDecode((await http.get(url)).body) as List).map((o) => Movie.fromMap(o)).toList();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMovies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Movies"),
       ),
-      body: ListView(
-        children: movies.map((m) => MovieTile(m)).toList(),
+      body: RefreshIndicator(
+        onRefresh: _loadMovies,
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: movies.map((m) => MovieTile(m)).toList(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addReview,

@@ -9,7 +9,7 @@ class Movie {
   Movie.fromMap(Map<String, dynamic> map)
       : name = map['name']!,
         genre = map['genre'],
-        ratings = map['ratings'].map(MovieRating.fromMap).toList();
+        ratings = (map['ratings'] as List).map((m) => MovieRating.fromMap(m)).toList();
 
   Map<String, dynamic> toMap() {
     return {
