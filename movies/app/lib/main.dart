@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies_shared/models/movie.dart';
+import 'package:uuid/uuid.dart';
 
 var computerIP = "http://192.168.0.7:8080/";
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _loadMovies() async {
-    print("loaded movies");
+    print("Loading movies");
     var url = Uri.parse(computerIP + 'movies');
     movies = (jsonDecode((await http.get(url)).body) as List).map((o) => Movie.fromMap(o)).toList();
     setState(() {});
@@ -70,7 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
         onRefresh: _loadMovies,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
-          children: movies.map((m) => MovieTile(m)).toList(),
+          children: movies.isEmpty
+              ? [
+                  const Center(
+                    child: Text("No movies:("),
+                  ),
+                ]
+              : movies.map((m) => MovieTile(m, _loadMovies)).toList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -84,21 +91,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class MovieTile extends StatelessWidget {
   final Movie movie;
+  final void Function() reloadPage;
 
-  MovieTile(this.movie, {Key? key}) : super(key: key);
+  const MovieTile(this.movie, this.reloadPage, {Key? key}) : super(key: key);
 
   void _onAppendReview(BuildContext context) async {
-    Movie? movie = await showDialog(
+    MovieRating? rating = await showDialog(
       context: context,
       builder: (BuildContext context) => AddReviewPopup(
-        existingMovie: this.movie,
+        existingMovie: movie,
       ),
     );
-    /*if (movie != null) {
-      var url = Uri.parse(computerIP + 'movie');
-      await http.post(url, body: jsonEncode(movie.toMap()));
-      // TODO reload page
-    }*/
+    if (rating != null) {
+      var url = Uri.parse(computerIP + "movies/${movie.id}/rating");
+      await http.post(url, body: jsonEncode(rating.toMap()));
+      reloadPage();
+    }
     print("append review");
   }
 
@@ -111,6 +119,7 @@ class MovieTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
         children: [
+          // TODO make rating bar unchangeable
           RatingBar.builder(
             itemSize: 30,
             allowHalfRating: true,
@@ -169,7 +178,13 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
                   _checkAllFieldsFilled();
                 },
               )
-            : Text(name!),
+            : Text(
+                name!,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
         widget.existingMovie == null
             ? TextField(
                 onChanged: (val) {
@@ -177,7 +192,13 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
                   _checkAllFieldsFilled();
                 },
               )
-            : Text(genre!),
+            : Text(
+                genre!,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
         RatingBar.builder(
           itemSize: 30,
           allowHalfRating: true,
@@ -193,31 +214,35 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
         ),
       ]),
       actions: <Widget>[
+        ElevatedButton(
+          onPressed: allFieldsFilled
+              ? () {
+                  if (widget.existingMovie == null) {
+                    Navigator.of(context).pop(Movie.fromMap({
+                      "name": name,
+                      "genre": genre,
+                      "id": const Uuid().toString(),
+                      "ratings": [
+                        {"rating": rating, "author": "me"},
+                      ]
+                    }));
+                  } else {
+                    Navigator.of(context).pop(
+                      MovieRating.fromMap(
+                        {"rating": rating, "author": "me"},
+                      ),
+                    );
+                  }
+                }
+              : null,
+          child: const Text('Save'),
+        ),
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: const Text('Cancel'),
         ),
-        TextButton(
-          style: TextButton.styleFrom(textStyle: TextStyle(color: allFieldsFilled ? Colors.blue : Colors.grey)),
-          onPressed: () {
-            if (allFieldsFilled) {
-              if (widget.existingMovie == null) {
-                Navigator.of(context).pop(Movie.fromMap({
-                  "name": name,
-                  "genre": genre,
-                  "ratings": [
-                    {"rating": rating, "author": "me"},
-                  ]
-                }));
-              } else {
-                //TODO
-              }
-            }
-          },
-          child: const Text('Save'),
-        )
       ],
     );
   }
