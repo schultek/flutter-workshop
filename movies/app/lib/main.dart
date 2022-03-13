@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context) => const AddReviewPopup(),
     );
     if (movie != null) {
-      var url = Uri.parse(computerIP + 'movie');
+      var url = Uri.parse(computerIP + 'movies/add');
       await http.post(url, body: jsonEncode(movie.toMap()));
       await _loadMovies();
     }
@@ -221,7 +221,7 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
                     Navigator.of(context).pop(Movie.fromMap({
                       "name": name,
                       "genre": genre,
-                      "id": const Uuid().toString(),
+                      "id": const Uuid().v4(),
                       "ratings": [
                         {"rating": rating, "author": "me"},
                       ]
