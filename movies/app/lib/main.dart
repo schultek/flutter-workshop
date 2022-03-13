@@ -133,16 +133,13 @@ class MovieTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // TODO make rating bar unchangeable
-          RatingBar.builder(
+          RatingBarIndicator(
             itemSize: 30,
-            allowHalfRating: true,
-            initialRating: movie.ratings.map((m) => m.rating).reduce((a, b) => a + b) / movie.ratings.length,
+            rating: movie.ratings.map((m) => m.rating).reduce((a, b) => a + b) / movie.ratings.length,
             itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,
             ),
-            onRatingUpdate: (double value) {},
           ),
           IconButton(
             visualDensity: VisualDensity.compact,

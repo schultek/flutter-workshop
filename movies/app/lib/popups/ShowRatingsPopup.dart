@@ -37,15 +37,13 @@ class ShowRatingsPopup extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(r.author),
-              RatingBar.builder(
+              RatingBarIndicator(
                 itemSize: 30,
-                allowHalfRating: false,
-                initialRating: r.rating * 1.0,
+                rating: r.rating * 1.0,
                 itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
                 ),
-                onRatingUpdate: (double value) {},
               ),
             ],
           ),
