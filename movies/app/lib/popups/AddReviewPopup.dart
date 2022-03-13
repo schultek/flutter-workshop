@@ -127,6 +127,12 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
             ElevatedButton(
               onPressed: allFieldsFilled
                   ? () {
@@ -149,12 +155,6 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
                     }
                   : null,
               child: const Text('Save'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
             ),
           ],
         ),
