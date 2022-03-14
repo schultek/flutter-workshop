@@ -8,6 +8,8 @@ environment:
 
 dependencies:
   args: ^2.0.0
+  movies_shared:
+    path: ../movies_shared
   shelf: ^1.1.0
   shelf_router: ^1.0.0
   shelf_hotreload: ^1.1.0

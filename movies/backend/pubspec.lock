@@ -190,6 +190,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  movies_shared:
+    dependency: "direct main"
+    description:
+      path: "../movies_shared"
+      relative: true
+    source: path
+    version: "1.0.0"
   node_preamble:
     dependency: transitive
     description:
