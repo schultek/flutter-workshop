@@ -9,7 +9,7 @@ import 'api_service.dart';
 /// This implementation uses a standard domain and sub-urls to get/send the data.
 /// It parses the data with jsonDecode/jsonEncode "manually".
 class HttpApiServiceImpl implements ApiService {
-  var domain = "http://192.168.0.7:8080/";
+  var domain = "http://192.168.0.184:8080/";
 
   @override
   Future<void> addMovie(Movie movie) async {
