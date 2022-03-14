@@ -4,40 +4,46 @@ import 'package:movies_shared/models/movie.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import 'db.dart';
+import 'services/movie_service_impl.dart';
 
-final MovieDatabase db = InMemoryMovieDatabase();
+Handler get apiHandler {
+  var movieService = MovieServiceImpl();
 
-Handler get apiHandler => Router()
-  ..get('/movies', moviesHandler)
-  ..post('/movies/add', addMovieHandler)
-  ..post('/movies/<movieId>/rating', addRatingToMovieHandler);
+  var router = Router();
 
-Future<Response> moviesHandler(Request request) async {
-  var movies = await db.getMovies();
-  return Response.ok(jsonEncode(movies.map((m) => m.toMap()).toList()));
-}
+  router.get('/movies', (request) async {
+    // call service
+    var movies = await movieService.getAllMovies();
 
-Future<Response> addMovieHandler(Request request) async {
-  var map = jsonDecode(await request.readAsString());
-  var movie = Movie.fromMap(map);
+    // encode response
+    var data = jsonEncode(movies.map((m) => m.toMap()).toList());
+    return Response.ok(data);
+  });
 
-  await db.insertMovie(movie);
+  router.post('/movies/add', (request) async {
+    // parse request
+    var body = jsonDecode(await request.readAsString());
+    var movie = Movie.fromMap(body);
 
-  return Response.ok('OK');
-}
+    // call service
+    await movieService.addMovie(movie);
 
-Future<Response> addRatingToMovieHandler(Request request) async {
-  var movieId = request.params['movieId']!;
+    // send response
+    return Response.ok('OK');
+  });
 
-  var movie = await db.getMovieById(movieId);
+  router.post('/movies/<movieId>/rating', (request) async {
+    // parse request
+    var movieId = request.params['movieId']!;
+    var body = jsonDecode(await request.readAsString());
+    var rating = MovieRating.fromMap(body);
 
-  if (movie == null) {
-    return Response(400, body: 'Movie with id $movieId does not exist.');
-  }
+    // call service
+    await movieService.addRating(movieId, rating);
 
-  var rating = MovieRating.fromMap(jsonDecode(await request.readAsString()));
-  await db.addMovieRating(movieId, rating);
+    // send response
+    return Response.ok('OK');
+  });
 
-  return Response.ok('OK');
+  return router;
 }

@@ -1,16 +1,8 @@
 import 'package:movies_shared/models/movie.dart';
 
-abstract class MovieDatabase {
-  Future<List<Movie>> getMovies();
+import 'db_service.dart';
 
-  Future<Movie?> getMovieById(String id);
-
-  Future<void> addMovieRating(String id, MovieRating rating);
-
-  Future<void> insertMovie(Movie movie);
-}
-
-class InMemoryMovieDatabase implements MovieDatabase {
+class InMemoryMovieDatabase implements DatabaseService {
   final movies = <String, Movie>{};
 
   @override
