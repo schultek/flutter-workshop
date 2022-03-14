@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:movies_shared/models/movie.dart';
 
+import '../models/movie.dart';
 import 'api_service.dart';
 
 /// The Http implementation of the ApiService.
@@ -15,20 +15,26 @@ class HttpApiServiceImpl implements ApiService {
   Future<void> addMovie(Movie movie) async {
     var url = Uri.parse(domain + 'movies/add');
     var body = jsonEncode(movie.toMap());
+
     await http.post(url, body: body);
   }
 
   @override
   Future<List<Movie>> getAllMovies() async {
     var url = Uri.parse(domain + 'movies');
+
     var response = await http.get(url);
-    return (jsonDecode(response.body) as List).map((o) => Movie.fromMap(o)).toList();
+
+    return (jsonDecode(response.body) as List)
+        .map((o) => Movie.fromMap(o))
+        .toList();
   }
 
   @override
   Future<void> addRating(String movieId, MovieRating rating) async {
     var url = Uri.parse(domain + "movies/$movieId/rating");
     var body = jsonEncode(rating.toMap());
+
     await http.post(url, body: body);
   }
 }

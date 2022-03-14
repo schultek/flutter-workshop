@@ -1,5 +1,4 @@
-import 'package:movies_shared/models/movie.dart';
-
+import '../models/movie.dart';
 import 'db_service.dart';
 
 class InMemoryMovieDatabase implements DatabaseService<Movie> {

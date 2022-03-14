@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/popups/add_review_popup.dart';
 import 'package:movies_app/services/api_service_impl.dart';
-import 'package:movies_shared/models/movie.dart';
 
+import 'models/movie.dart';
 import 'services/api_service.dart';
 import 'widgets/movie_tile.dart';
 
