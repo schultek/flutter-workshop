@@ -1,4 +1,4 @@
-import 'package:movies_shared/models/movie.dart';
+import '../models/movie.dart';
 
 /// The ApiService provides stubs that are necessary for interactions between frontend and backend.
 abstract class ApiService {

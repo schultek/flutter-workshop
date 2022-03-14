@@ -1,6 +1,6 @@
 import 'package:movies_backend/services/db_service.dart';
-import 'package:movies_shared/models/movie.dart';
 
+import '../models/movie.dart';
 import 'db_service_impl.dart';
 
 class MovieService {

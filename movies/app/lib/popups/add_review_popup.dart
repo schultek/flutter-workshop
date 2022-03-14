@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movies_shared/models/movie.dart';
 import 'package:uuid/uuid.dart';
+
+import '../models/movie.dart';
 
 /// The popup that is shown when the user wants to add a review (to an existing movie or a new one).
 class AddReviewPopup extends StatefulWidget {
@@ -28,7 +29,8 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
   bool allFieldsFilled = false;
 
   void _checkAllFieldsFilled() {
-    setState(() => allFieldsFilled = name != null && genre != null && rating != null);
+    setState(() =>
+        allFieldsFilled = name != null && genre != null && rating != null);
   }
 
   @override
@@ -147,19 +149,13 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
               onPressed: allFieldsFilled
                   ? () {
                       if (widget.existingMovie == null) {
-                        Navigator.of(context).pop(Movie.fromMap({
-                          "name": name,
-                          "genre": genre,
-                          "id": const Uuid().v4(),
-                          "ratings": [
-                            {"rating": rating, "author": "me"},
-                          ]
-                        }));
+                        Navigator.of(context).pop(
+                          Movie(const Uuid().v4(), name!, genre!,
+                              [MovieRating(rating!, "me")]),
+                        );
                       } else {
                         Navigator.of(context).pop(
-                          MovieRating.fromMap(
-                            {"rating": rating, "author": "me"},
-                          ),
+                          MovieRating(rating!, "me"),
                         );
                       }
                     }
