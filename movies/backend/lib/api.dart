@@ -11,7 +11,7 @@ Handler get apiHandler {
 
   var router = Router();
 
-  router.get('/movies', (request) async {
+  router.get('/movies', (Request request) async {
     // call service
     var movies = await movieService.getAllMovies();
 
@@ -20,7 +20,7 @@ Handler get apiHandler {
     return Response.ok(data);
   });
 
-  router.post('/movies/add', (request) async {
+  router.post('/movies/add', (Request request) async {
     // parse request
     var body = jsonDecode(await request.readAsString());
     var movie = Movie.fromMap(body);
@@ -32,7 +32,7 @@ Handler get apiHandler {
     return Response.ok('OK');
   });
 
-  router.post('/movies/<movieId>/rating', (request) async {
+  router.post('/movies/<movieId>/rating', (Request request) async {
     // parse request
     var movieId = request.params['movieId']!;
     var body = jsonDecode(await request.readAsString());
