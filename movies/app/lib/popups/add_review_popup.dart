@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/movie.dart';
+import '../services/user_service.dart';
 
 /// The popup that is shown when the user wants to add a review (to an existing movie or a new one).
 class AddReviewPopup extends StatefulWidget {
@@ -150,12 +151,13 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
                   ? () {
                       if (widget.existingMovie == null) {
                         Navigator.of(context).pop(
-                          Movie(const Uuid().v4(), name!, genre!,
-                              [MovieRating(rating!, "me")]),
+                          Movie(const Uuid().v4(), name!, genre!, [
+                            MovieRating(rating!, UserService.instance.username)
+                          ]),
                         );
                       } else {
                         Navigator.of(context).pop(
-                          MovieRating(rating!, "me"),
+                          MovieRating(rating!, UserService.instance.username),
                         );
                       }
                     }
