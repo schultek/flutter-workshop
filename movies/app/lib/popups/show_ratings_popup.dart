@@ -13,7 +13,7 @@ class ShowRatingsPopup extends StatelessWidget {
       contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
       titlePadding: EdgeInsets.zero,
       title: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: Colors.blue,
@@ -21,7 +21,7 @@ class ShowRatingsPopup extends StatelessWidget {
             top: Radius.circular(20),
           ),
         ),
-        child: Text(
+        child: const Text(
           'Movie Ratings',
           style: TextStyle(color: Colors.white),
         ),

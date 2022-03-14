@@ -10,6 +10,13 @@ class AddReviewPopup extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _AddReviewPopupState();
+
+  static Future<Movie?> show(BuildContext context) {
+    return showDialog<Movie>(
+      context: context,
+      builder: (context) => const AddReviewPopup(),
+    );
+  }
 }
 
 class _AddReviewPopupState extends State<AddReviewPopup> {
@@ -18,7 +25,8 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
   bool allFieldsFilled = false;
 
   void _checkAllFieldsFilled() {
-    setState(() => allFieldsFilled = name != null && genre != null && rating != null);
+    setState(() =>
+        allFieldsFilled = name != null && genre != null && rating != null);
   }
 
   @override
@@ -34,7 +42,7 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
       contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
       titlePadding: EdgeInsets.zero,
       title: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: Colors.blue,
@@ -42,7 +50,7 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
             top: Radius.circular(20),
           ),
         ),
-        child: Text(
+        child: const Text(
           'Add a new movie review!',
           style: TextStyle(color: Colors.white),
         ),
