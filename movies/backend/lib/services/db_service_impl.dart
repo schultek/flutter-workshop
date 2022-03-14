@@ -2,27 +2,26 @@ import 'package:movies_shared/models/movie.dart';
 
 import 'db_service.dart';
 
-class InMemoryMovieDatabase implements DatabaseService {
+class InMemoryMovieDatabase implements DatabaseService<Movie> {
   final movies = <String, Movie>{};
 
   @override
-  Future<List<Movie>> getMovies() async {
+  Future<List<Movie>> queryAll() async {
     return movies.values.toList();
   }
 
   @override
-  Future<Movie?> getMovieById(String id) async {
+  Future<Movie?> queryById(String id) async {
     return movies[id];
   }
 
   @override
-  Future<void> insertMovie(Movie movie) async {
+  Future<void> insert(Movie movie) async {
     movies[movie.id] = movie;
   }
 
   @override
-  Future<void> addMovieRating(String id, MovieRating rating) async {
-    var movie = movies[id]!;
-    movie.ratings.add(rating);
+  Future<void> update(Movie movie) async {
+    movies[movie.id] = movie;
   }
 }

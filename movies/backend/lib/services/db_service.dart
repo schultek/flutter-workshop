@@ -1,13 +1,9 @@
-import 'package:movies_shared/models/movie.dart';
+abstract class DatabaseService<T> {
+  Future<List<T>> queryAll();
 
-abstract class DatabaseService {
-  static late DatabaseService instance;
+  Future<T?> queryById(String id);
 
-  Future<List<Movie>> getMovies();
+  Future<void> insert(T entity);
 
-  Future<Movie?> getMovieById(String id);
-
-  Future<void> addMovieRating(String id, MovieRating rating);
-
-  Future<void> insertMovie(Movie movie);
+  Future<void> update(T entity);
 }

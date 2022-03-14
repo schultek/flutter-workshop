@@ -4,10 +4,10 @@ import 'package:movies_shared/models/movie.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import 'services/movie_service_impl.dart';
+import 'services/movie_service.dart';
 
 Handler get apiHandler {
-  var movieService = MovieServiceImpl();
+  var movieService = MovieService();
 
   var router = Router();
 
