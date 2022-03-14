@@ -5,6 +5,9 @@ import 'package:movies_shared/models/movie.dart';
 
 import 'api_service.dart';
 
+/// The Http implementation of the ApiService.
+/// This implementation uses a standard domain and sub-urls to get/send the data.
+/// It parses the data with jsonDecode/jsonEncode "manually".
 class HttpApiServiceImpl implements ApiService {
   var domain = "http://192.168.0.7:8080/";
 
@@ -19,9 +22,7 @@ class HttpApiServiceImpl implements ApiService {
   Future<List<Movie>> getAllMovies() async {
     var url = Uri.parse(domain + 'movies');
     var response = await http.get(url);
-    return (jsonDecode(response.body) as List)
-        .map((o) => Movie.fromMap(o))
-        .toList();
+    return (jsonDecode(response.body) as List).map((o) => Movie.fromMap(o)).toList();
   }
 
   @override

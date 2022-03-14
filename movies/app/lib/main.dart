@@ -11,6 +11,7 @@ void main() {
   runApp(const MoviesApp());
 }
 
+/// The main app widget.
 class MoviesApp extends StatelessWidget {
   const MoviesApp({Key? key}) : super(key: key);
 
@@ -25,6 +26,7 @@ class MoviesApp extends StatelessWidget {
   }
 }
 
+/// The main page of the app, showing a list of movie tiles and a floating button to add a new movie.
 class MoviesPage extends StatefulWidget {
   const MoviesPage({Key? key}) : super(key: key);
 
@@ -41,6 +43,7 @@ class _MoviesPageState extends State<MoviesPage> {
     _loadMovies();
   }
 
+  /// Add a new movie and an initial review, and reload the list of movies afterwards.
   void _addReview() async {
     Movie? movie = await AddReviewPopup.show(context);
     if (movie != null) {
@@ -49,6 +52,7 @@ class _MoviesPageState extends State<MoviesPage> {
     }
   }
 
+  /// Fetch the list of movies and reviews and show them.
   Future<void> _loadMovies() async {
     print("Loading movies");
     movies = await ApiService.instance.getAllMovies();

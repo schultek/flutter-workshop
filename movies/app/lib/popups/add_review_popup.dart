@@ -3,7 +3,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies_shared/models/movie.dart';
 import 'package:uuid/uuid.dart';
 
+/// The popup that is shown when the user wants to add a review (to an existing movie or a new one).
 class AddReviewPopup extends StatefulWidget {
+  /// The movie where the review is appended, if it exists.
+  /// If this value is empty, the popup will show fields for entering a title and genre.
   final Movie? existingMovie;
 
   const AddReviewPopup({this.existingMovie, Key? key}) : super(key: key);
@@ -25,8 +28,7 @@ class _AddReviewPopupState extends State<AddReviewPopup> {
   bool allFieldsFilled = false;
 
   void _checkAllFieldsFilled() {
-    setState(() =>
-        allFieldsFilled = name != null && genre != null && rating != null);
+    setState(() => allFieldsFilled = name != null && genre != null && rating != null);
   }
 
   @override
