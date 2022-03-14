@@ -3,6 +3,7 @@ import 'package:movies_app/popups/add_review_popup.dart';
 import 'package:movies_app/services/api_service_impl.dart';
 
 import 'models/movie.dart';
+import 'popups/change_username_popup.dart';
 import 'services/api_service.dart';
 import 'widgets/movie_tile.dart';
 
@@ -64,6 +65,14 @@ class _MoviesPageState extends State<MoviesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Movies"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {
+              ChangeUsernamePopup.show(context);
+            },
+          )
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: _loadMovies,
