@@ -6,9 +6,9 @@ import 'package:shelf_router/shelf_router.dart';
 import 'models/movie.dart';
 import 'services/movie_service.dart';
 
-Handler get apiHandler {
-  var movieService = MovieService();
+var movieService = MovieService();
 
+Handler get apiHandler {
   var router = Router();
 
   router.get('/movies', (Request request) async {
