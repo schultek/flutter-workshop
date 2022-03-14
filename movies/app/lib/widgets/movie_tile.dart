@@ -6,6 +6,7 @@ import '../popups/add_review_popup.dart';
 import '../popups/show_ratings_popup.dart';
 import '../services/api_service.dart';
 
+/// A single tile for the main page, showing a movie title, genre, average rating and a button to append a rating.
 class MovieTile extends StatelessWidget {
   final Movie movie;
   final void Function() reloadPage;
@@ -50,8 +51,7 @@ class MovieTile extends StatelessWidget {
         children: [
           RatingBarIndicator(
             itemSize: 30,
-            rating: movie.ratings.map((m) => m.rating).reduce((a, b) => a + b) /
-                movie.ratings.length,
+            rating: movie.ratings.map((m) => m.rating).reduce((a, b) => a + b) / movie.ratings.length,
             itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,
