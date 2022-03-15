@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movies_shared/models/movie.dart';
 import 'package:uuid/uuid.dart';
 
-import '../models/movie.dart';
-import '../services/user_service.dart';
+import '../../services/user_service.dart';
 
 /// The popup that is shown when the user wants to add a review (to an existing movie or a new one).
 class AddReviewPopup extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movies_shared/models/movie.dart';
 
-import '../models/movie.dart';
-import '../popups/add_review_popup.dart';
-import '../popups/show_ratings_popup.dart';
-import '../services/api_service.dart';
+import '../services/movie_service.dart';
+import 'popups/add_review_popup.dart';
+import 'popups/show_ratings_popup.dart';
 
 /// A single tile for the main page, showing a movie title, genre, average rating and a button to append a rating.
 class MovieTile extends StatelessWidget {
@@ -21,14 +21,12 @@ class MovieTile extends StatelessWidget {
       ),
     );
     if (rating != null) {
-      await ApiService.instance.addRating(movie.id, rating);
+      await MovieService.instance.addRating(movie.id, rating);
       reloadPage();
     }
-    print("append review");
   }
 
   void _showRatings(BuildContext context) async {
-    print("show ratings");
     await showDialog(
       context: context,
       builder: (BuildContext context) => ShowRatingsPopup(

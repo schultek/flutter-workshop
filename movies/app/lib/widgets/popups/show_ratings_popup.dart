@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import '../models/movie.dart';
+import 'package:movies_shared/models/movie.dart';
 
 /// The popup that shows all ratings of a movie.
 class ShowRatingsPopup extends StatelessWidget {

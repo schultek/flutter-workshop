@@ -1,7 +1,5 @@
 import 'package:movies_backend/services/db_service.dart';
-
-import '../models/movie.dart';
-import 'db_service_impl.dart';
+import 'package:movies_shared/models/movie.dart';
 
 class MovieService {
   final DatabaseService<Movie> db = InMemoryMovieDatabase();

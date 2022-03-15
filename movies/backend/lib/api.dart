@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:movies_shared/models/movie.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import 'models/movie.dart';
 import 'services/movie_service.dart';
 
 var movieService = MovieService();

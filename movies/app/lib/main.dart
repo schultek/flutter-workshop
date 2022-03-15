@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/popups/add_review_popup.dart';
-import 'package:movies_app/services/api_service_impl.dart';
+import 'package:movies_shared/models/movie.dart';
 
-import 'models/movie.dart';
-import 'popups/change_username_popup.dart';
-import 'services/api_service.dart';
+import 'services/movie_service.dart';
 import 'widgets/movie_tile.dart';
+import 'widgets/popups/add_review_popup.dart';
+import 'widgets/popups/change_username_popup.dart';
 
 void main() {
-  ApiService.instance = HttpApiServiceImpl();
   runApp(const MoviesApp());
 }
 
@@ -48,15 +46,14 @@ class _MoviesPageState extends State<MoviesPage> {
   void _addReview() async {
     Movie? movie = await AddReviewPopup.show(context);
     if (movie != null) {
-      await ApiService.instance.addMovie(movie);
+      await MovieService.instance.addMovie(movie);
       await _loadMovies();
     }
   }
 
   /// Fetch the list of movies and reviews and show them.
   Future<void> _loadMovies() async {
-    print("Loading movies");
-    movies = await ApiService.instance.getAllMovies();
+    movies = await MovieService.instance.getAllMovies();
     setState(() {});
   }
 

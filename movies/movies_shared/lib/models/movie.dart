@@ -1,9 +1,9 @@
 class Movie {
-  String id;
-  String name;
-  String genre;
+  final String id;
+  final String name;
+  final String genre;
 
-  List<MovieRating> ratings;
+  final List<MovieRating> ratings;
 
   Movie(this.id, this.name, this.genre, this.ratings);
 
@@ -23,11 +23,30 @@ class Movie {
       'ratings': ratings.map((r) => r.toMap()).toList(),
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Movie &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          genre == other.genre &&
+          ratings == other.ratings;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ name.hashCode ^ genre.hashCode ^ ratings.hashCode;
+
+  @override
+  String toString() {
+    return 'Movie{id: $id, name: $name, genre: $genre, ratings: $ratings}';
+  }
 }
 
 class MovieRating {
-  int rating;
-  String author;
+  final int rating;
+  final String author;
 
   MovieRating(this.rating, this.author);
 
@@ -40,5 +59,21 @@ class MovieRating {
       'rating': rating,
       'author': author,
     };
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MovieRating &&
+          runtimeType == other.runtimeType &&
+          rating == other.rating &&
+          author == other.author;
+
+  @override
+  int get hashCode => rating.hashCode ^ author.hashCode;
+
+  @override
+  String toString() {
+    return 'MovieRating{rating: $rating, author: $author}';
   }
 }

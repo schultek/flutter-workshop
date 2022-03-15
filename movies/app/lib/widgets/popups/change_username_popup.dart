@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies_shared/models/movie.dart';
 
-import '../models/movie.dart';
-import '../services/user_service.dart';
+import '../../services/user_service.dart';
 
 class ChangeUsernamePopup extends StatefulWidget {
   const ChangeUsernamePopup({Key? key}) : super(key: key);
