@@ -6,25 +6,25 @@ import 'package:uuid/uuid.dart';
 import '../../services/user_service.dart';
 
 /// The popup that is shown when the user wants to add a review (to an existing movie or a new one).
-class AddReviewPopup extends StatefulWidget {
+class AddReviewDialog extends StatefulWidget {
   /// The movie where the review is appended, if it exists.
   /// If this value is empty, the popup will show fields for entering a title and genre.
   final Movie? existingMovie;
 
-  const AddReviewPopup({this.existingMovie, Key? key}) : super(key: key);
+  const AddReviewDialog({this.existingMovie, Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _AddReviewPopupState();
+  State<StatefulWidget> createState() => _AddReviewDialogState();
 
   static Future<Movie?> show(BuildContext context) {
     return showDialog<Movie>(
       context: context,
-      builder: (context) => const AddReviewPopup(),
+      builder: (context) => const AddReviewDialog(),
     );
   }
 }
 
-class _AddReviewPopupState extends State<AddReviewPopup> {
+class _AddReviewDialogState extends State<AddReviewDialog> {
   String? name, genre;
   int? rating;
   bool allFieldsFilled = false;

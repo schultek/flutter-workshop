@@ -3,10 +3,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies_shared/models/movie.dart';
 
 /// The popup that shows all ratings of a movie.
-class ShowRatingsPopup extends StatelessWidget {
+class ShowRatingsDialog extends StatelessWidget {
   final Movie movie;
 
-  const ShowRatingsPopup(this.movie, {Key? key}) : super(key: key);
+  const ShowRatingsDialog(this.movie, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

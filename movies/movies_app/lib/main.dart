@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movies_shared/models/movie.dart';
 
 import 'services/movie_service.dart';
+import 'widgets/dialogs/add_review_dialog.dart';
+import 'widgets/dialogs/change_username_dialog.dart';
 import 'widgets/movie_tile.dart';
-import 'widgets/popups/add_review_popup.dart';
-import 'widgets/popups/change_username_popup.dart';
 
 void main() {
   runApp(const MoviesApp());
@@ -44,7 +44,7 @@ class _MoviesPageState extends State<MoviesPage> {
 
   /// Add a new movie and an initial review, and reload the list of movies afterwards.
   void _addReview() async {
-    Movie? movie = await AddReviewPopup.show(context);
+    Movie? movie = await AddReviewDialog.show(context);
     if (movie != null) {
       await MovieService.instance.addMovie(movie);
       await _loadMovies();
@@ -66,7 +66,7 @@ class _MoviesPageState extends State<MoviesPage> {
           IconButton(
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              ChangeUsernamePopup.show(context);
+              ChangeUsernameDialog.show(context);
             },
           )
         ],

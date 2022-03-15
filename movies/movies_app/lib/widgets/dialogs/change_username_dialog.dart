@@ -3,21 +3,21 @@ import 'package:movies_shared/models/movie.dart';
 
 import '../../services/user_service.dart';
 
-class ChangeUsernamePopup extends StatefulWidget {
-  const ChangeUsernamePopup({Key? key}) : super(key: key);
+class ChangeUsernameDialog extends StatefulWidget {
+  const ChangeUsernameDialog({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ChangeUsernamePopupState();
+  State<StatefulWidget> createState() => _ChangeUsernameDialogState();
 
   static Future<Movie?> show(BuildContext context) {
     return showDialog<Movie>(
       context: context,
-      builder: (context) => const ChangeUsernamePopup(),
+      builder: (context) => const ChangeUsernameDialog(),
     );
   }
 }
 
-class _ChangeUsernamePopupState extends State<ChangeUsernamePopup> {
+class _ChangeUsernameDialogState extends State<ChangeUsernameDialog> {
   late String username;
 
   @override
