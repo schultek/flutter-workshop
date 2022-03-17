@@ -13,7 +13,7 @@ class MovieService {
     // send request
     var response = await http.get(url);
     // decode response
-    return Mapper.fromJson(response.body);
+    return Mapper.fromJson<List<Movie>>(response.body);
   }
 
   Future<void> addMovie(Movie movie) async {

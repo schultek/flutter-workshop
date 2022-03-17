@@ -11,7 +11,15 @@ abstract class DatabaseService<T> {
 }
 
 class InMemoryMovieDatabase implements DatabaseService<Movie> {
-  final movies = <String, Movie>{};
+  final movies = <String, Movie>{
+    'hobbit': Movie('hobbit', 'The Hobbit 1', 'Fantasy', [
+      MovieRating(5, 'Anja'),
+      MovieRating(2, 'Steffen'),
+    ]),
+    'redsparrow': Movie('redsparrow', 'Red Sparrow', 'Thriller', [
+      MovieRating(3, 'Viviana'),
+    ]),
+  };
 
   @override
   Future<List<Movie>> queryAll() async {
