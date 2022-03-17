@@ -32,8 +32,13 @@ class AuthService {
     if (response.statusCode != 200) {
       return false;
     }
-    _token = response.body;
+    _token = response.body; // store the jwt
     _username = username;
     return true;
+  }
+
+  void logout() {
+    _username = null;
+    _token = null;
   }
 }

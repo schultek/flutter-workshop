@@ -12,9 +12,10 @@ Handler get authHandler {
 
   router.post('/login', (Request request) async {
     var data = jsonDecode(await request.readAsString());
+    var username = data['username'], password = data['password'];
 
-    if (userService.matchesPassword(data['username'], data['password'])) {
-      return Response.ok(userService.createJWT(data['username']));
+    if (userService.matchesPassword(username, password)) {
+      return Response.ok(userService.createJWT(username));
     } else {
       return Response.forbidden('');
     }

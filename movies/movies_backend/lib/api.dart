@@ -13,19 +13,23 @@ Handler get apiHandler {
 
   var router = Router();
 
-  router.mount('/movies', (request) {
+  router.mount('/movies', _guard(movies));
+  router.mount('/auth', auth);
+
+  return router;
+}
+
+Handler _guard(Handler handler) {
+  return (request) {
     var token = request.headers['Authorization'];
     if (token != null) {
       if (userService.validateJWT(token)) {
-        return movies(request);
+        return handler(request);
       } else {
         return Response.forbidden('Invalid auth token.');
       }
     } else {
       return Response.forbidden('Missing auth token.');
     }
-  });
-  router.mount('/auth', auth);
-
-  return router;
+  };
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/services/user_service.dart';
 import 'package:movies_shared/models/movie.dart';
 
 import '../services/movie_service.dart';
 import '../widgets/dialogs/add_review_dialog.dart';
 import '../widgets/movie_tile.dart';
+import 'login_page.dart';
 
 /// The main page of the app, showing a list of movie tiles and a floating button to add a new movie.
 class MoviesPage extends StatefulWidget {
@@ -42,6 +44,16 @@ class _MoviesPageState extends State<MoviesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Movies"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              AuthService.instance.logout();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()));
+            },
+          )
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: _loadMovies,

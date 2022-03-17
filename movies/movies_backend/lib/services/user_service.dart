@@ -1,7 +1,9 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class UserService {
-  final Map<String, String> _users = {};
+  final Map<String, String> _users = {
+    'kilian': '1234', // test user
+  };
   final _secretKey = SecretKey('secret passphrase');
 
   bool userExists(String username) {
