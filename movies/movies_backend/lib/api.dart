@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:movies_shared/models/movie.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -15,15 +13,13 @@ Handler get apiHandler {
     // call service
     var movies = await movieService.getAllMovies();
 
-    // encode response
-    var data = jsonEncode(movies.map((m) => m.toMap()).toList());
-    return Response.ok(data);
+    // send response
+    return Response.ok(Mapper.toJson(movies));
   });
 
   router.post('/movies/add', (Request request) async {
     // parse request
-    var body = jsonDecode(await request.readAsString());
-    var movie = Movie.fromMap(body);
+    var movie = Mapper.fromJson<Movie>(await request.readAsString());
 
     // call service
     await movieService.addMovie(movie);
@@ -35,8 +31,7 @@ Handler get apiHandler {
   router.post('/movies/<movieId>/rating', (Request request) async {
     // parse request
     var movieId = request.params['movieId']!;
-    var body = jsonDecode(await request.readAsString());
-    var rating = MovieRating.fromMap(body);
+    var rating = Mapper.fromJson<MovieRating>(await request.readAsString());
 
     // call service
     await movieService.addRating(movieId, rating);

@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  build:
+    dependency: transitive
+    description:
+      name: build
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.1"
   charcode:
     dependency: transitive
     description:
@@ -78,6 +85,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  dart_mappable:
+    dependency: transitive
+    description:
+      name: dart_mappable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0-dev.5"
+  dart_style:
+    dependency: transitive
+    description:
+      name: dart_style
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.2"
   file:
     dependency: transitive
     description:
@@ -274,6 +295,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  source_gen:
+    dependency: transitive
+    description:
+      name: source_gen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.1"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -358,6 +386,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  type_plus:
+    dependency: transitive
+    description:
+      name: type_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   typed_data:
     dependency: transitive
     description:

@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:movies_shared/models/movie.dart';
 
 /// The main service that communicates with the backend via HTTP.
-/// This implementation uses a standard domain and sub-urls to get/send the data.
-/// It parses the data with jsonDecode/jsonEncode "manually".
+/// It uses a standard domain and sub-urls to get/send the data.
 class MovieService {
   static late MovieService instance = MovieService();
   var domain = "http://192.168.0.184:8080/";
@@ -16,26 +13,20 @@ class MovieService {
     // send request
     var response = await http.get(url);
     // decode response
-    return (jsonDecode(response.body) as List)
-        .map((o) => Movie.fromMap(o))
-        .toList();
+    return Mapper.fromJson(response.body);
   }
 
   Future<void> addMovie(Movie movie) async {
     // construct url
     var url = Uri.parse(domain + 'movies/add');
-    // encode data
-    var body = jsonEncode(movie.toMap());
     // send request
-    await http.post(url, body: body);
+    await http.post(url, body: movie.toJson());
   }
 
   Future<void> addRating(String movieId, MovieRating rating) async {
     // construct url
     var url = Uri.parse(domain + "movies/$movieId/rating");
-    // encode data
-    var body = jsonEncode(rating.toMap());
     // send request
-    await http.post(url, body: body);
+    await http.post(url, body: rating.toJson());
   }
 }
