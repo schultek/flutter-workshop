@@ -1,44 +1,31 @@
-import 'package:movies_shared/models/movie.dart';
+import 'package:movies_backend/auth.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import 'movies.dart';
 import 'services/movie_service.dart';
 
 var movieService = MovieService();
 
 Handler get apiHandler {
+  var movies = moviesHandler;
+  var auth = authHandler;
+
   var router = Router();
 
-  router.get('/movies', (Request request) async {
-    // call service
-    var movies = await movieService.getAllMovies();
-
-    // send response
-    return Response.ok(Mapper.toJson(movies));
+  router.mount('/movies', (request) {
+    var token = request.headers['Authorization'];
+    if (token != null) {
+      if (userService.validateJWT(token)) {
+        return movies(request);
+      } else {
+        return Response.forbidden('Invalid auth token.');
+      }
+    } else {
+      return Response.forbidden('Missing auth token.');
+    }
   });
-
-  router.post('/movies/add', (Request request) async {
-    // parse request
-    var movie = Mapper.fromJson<Movie>(await request.readAsString());
-
-    // call service
-    await movieService.addMovie(movie);
-
-    // send response
-    return Response.ok('OK');
-  });
-
-  router.post('/movies/<movieId>/rating', (Request request) async {
-    // parse request
-    var movieId = request.params['movieId']!;
-    var rating = Mapper.fromJson<MovieRating>(await request.readAsString());
-
-    // call service
-    await movieService.addRating(movieId, rating);
-
-    // send response
-    return Response.ok('OK');
-  });
+  router.mount('/auth', auth);
 
   return router;
 }

@@ -152,12 +152,12 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                       if (widget.existingMovie == null) {
                         Navigator.of(context).pop(
                           Movie(const Uuid().v4(), name!, genre!, [
-                            MovieRating(rating!, UserService.instance.username)
+                            MovieRating(rating!, AuthService.instance.username)
                           ]),
                         );
                       } else {
                         Navigator.of(context).pop(
-                          MovieRating(rating!, UserService.instance.username),
+                          MovieRating(rating!, AuthService.instance.username),
                         );
                       }
                     }

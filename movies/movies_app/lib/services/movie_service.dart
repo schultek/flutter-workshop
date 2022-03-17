@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:movies_app/services/user_service.dart';
 import 'package:movies_shared/models/movie.dart';
 
 /// The main service that communicates with the backend via HTTP.
@@ -11,7 +12,10 @@ class MovieService {
     // construct url
     var url = Uri.parse(domain + 'movies');
     // send request
-    var response = await http.get(url);
+    var response = await http.get(
+      url,
+      headers: {'Authorization': 'Bearer ${AuthService.instance.token}'},
+    );
     // decode response
     return Mapper.fromJson<List<Movie>>(response.body);
   }
@@ -20,13 +24,21 @@ class MovieService {
     // construct url
     var url = Uri.parse(domain + 'movies/add');
     // send request
-    await http.post(url, body: movie.toJson());
+    await http.post(
+      url,
+      body: movie.toJson(),
+      headers: {'Authorization': 'Bearer ${AuthService.instance.token}'},
+    );
   }
 
   Future<void> addRating(String movieId, MovieRating rating) async {
     // construct url
     var url = Uri.parse(domain + "movies/$movieId/rating");
     // send request
-    await http.post(url, body: rating.toJson());
+    await http.post(
+      url,
+      body: rating.toJson(),
+      headers: {'Authorization': 'Bearer ${AuthService.instance.token}'},
+    );
   }
 }

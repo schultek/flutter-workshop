@@ -8,6 +8,7 @@ environment:
   sdk: '>=2.15.0 <3.0.0'
 
 dependencies:
+  dart_jsonwebtoken: ^2.4.1
   movies_shared:
     path: ../movies_shared
   shelf: ^1.1.0
