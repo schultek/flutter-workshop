@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:swipe_stack/swipe_stack.dart';
+import 'package:swipable_stack/swipable_stack.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,14 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void favorite(int index) {
     setState(() {
-      var image = images.removeAt(index);
+      var image = images[index];
       favorites.add(image);
-    });
-  }
-
-  void skip(int index) {
-    setState(() {
-      images.removeAt(index);
     });
   }
 
@@ -100,9 +94,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class CardStackPage extends StatelessWidget {
+class CardStackPage extends StatefulWidget {
   final List images;
   CardStackPage(this.images);
+
+  @override
+  State<CardStackPage> createState() => _CardStackPageState();
+}
+
+class _CardStackPageState extends State<CardStackPage> {
+  SwipableStackController controller = SwipableStackController();
 
   @override
   Widget build(BuildContext context) {
@@ -112,25 +113,26 @@ class CardStackPage extends StatelessWidget {
         children: [
           Container(
             height: 600,
-            child: SwipeStack(
-              children: images.map((image) {
-                return SwiperItem(builder: (position, progress) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      image["url"],
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                });
-              }).toList(),
-              onSwipe: (index, position) {
-                if (position == SwiperPosition.Right) {
+            padding: EdgeInsets.all(20),
+            child: SwipableStack(
+              controller: controller,
+              itemCount: widget.images.length,
+              stackClipBehaviour: Clip.none,
+              builder: (context, props) {
+                var image = widget.images[props.index];
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    image["url"],
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+              onSwipeCompleted: (index, direction) {
+                if (direction == SwipeDirection.right) {
                   MyHomePage.of(context).favorite(index);
-                } else if (position == SwiperPosition.Left) {
-                  MyHomePage.of(context).skip(index);
                 }
               },
             ),
@@ -144,7 +146,7 @@ class CardStackPage extends StatelessWidget {
                   color: Colors.red,
                   icon: Icon(Icons.close),
                   onPressed: () {
-                    MyHomePage.of(context).skip(images.length - 1);
+                    controller.next(swipeDirection: SwipeDirection.left);
                   },
                 ),
               ),
@@ -154,7 +156,7 @@ class CardStackPage extends StatelessWidget {
                   color: Colors.green,
                   icon: Icon(Icons.check),
                   onPressed: () {
-                    MyHomePage.of(context).favorite(images.length - 1);
+                    controller.next(swipeDirection: SwipeDirection.right);
                   },
                 ),
               ),

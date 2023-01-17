@@ -110,12 +110,12 @@ body: pageIndex == 0
 
 ## package.yml
 
-swipe_stack: ^1.0.0
+swipable_stack: ^2.0.0
 http: ^0.13.0
 
 ## main.dart
 
-[type] SwipeStack(children: [])
+[type] SwipableStack(builder: (context, props) {})
 
 List<dynamic> images = [];
 
@@ -133,53 +133,44 @@ setState(() {
   images = catImages;
 });
 
-children: images.map((image) {
-  // TODO return image widget        
-}).toList(),
-
-return SwiperItem(builder: (position, progress) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-    child: Image.network(
-      image["url"],
-      width: double.infinity,
-      height: double.infinity,
-      fit: BoxFit.cover,
-    ),
-  );
-});
+var image = widget.images[props.index];
+return ClipRRect(
+  borderRadius: BorderRadius.circular(20),
+  child: Image.network(
+    image["url"],
+    width: double.infinity,
+    height: double.infinity,
+    fit: BoxFit.cover,
+  ),
+);
 
 [wrap] Container(height: 600)
 [wrap] Center()
 
-onSwipe: (index, position) {
+itemCount: widget.images.length,
+
+controller: SwipableStackController(),
+stackClipBehaviour: Clip.none,
+
+onSwipeCompleted: (index, direction) {
 
 },
 
-if (position == SwiperPosition.Right) {
+if (direction == SwipeDirection.right) {
   // TODO favorite image
-} else if (position == SwiperPosition.Left) {
-  // TODO discard image
 }
 
 List<dynamic> favorites = [];
 
 void favorite(int index) {
   setState(() {
-    var image = images.removeAt(index);
+    var image = images[index];
     favorites.add(image);
-  });
-}
-
-void skip(int index) {
-  setState(() {
-    images.removeAt(index);
   });
 }
 
 [type] 
 context.findAncestorStateOfType<_MyHomePageState>().favorite(index);
-context.findAncestorStateOfType<_MyHomePageState>().skip(index);
 
 [type] stless -> FavoritesPage
 
@@ -232,9 +223,11 @@ IconButton(
   },
 ),
 
-context.findAncestorStateOfType<_MyHomePageState>().skip(images.length - 1);
+SwipableStackController controller = SwipableStackController();
 
-context.findAncestorStateOfType<_MyHomePageState>().favorite(images.length - 1);
+controller.next(swipeDirection: SwipeDirection.left);
+
+controller.next(swipeDirection: SwipeDirection.right);
 
 # END
 

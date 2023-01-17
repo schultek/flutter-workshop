@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  swipe_stack: ^1.0.0
+  swipable_stack: ^2.0.0
   http: ^0.13.0
 
 dev_dependencies:

@@ -14,11 +14,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a092dfd-c72f-4f74-8e3b-b1ad9e59dad0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/catinder/snippets.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catinder/analysis_options.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catinder/web/icons/Icon-maskable-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catinder/web/icons/Icon-maskable-512.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/FlutterWorkshop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlutterWorkshop.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/.metadata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/app/src/main/res/values-night/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/app/src/main/res/values-night/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/catinder/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/lib/snippets.md" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/lib/snippets.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catinder/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/catinder/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +52,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1pQzOh1jcHfpRRAm6taVh8nCpgP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,6 +62,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
@@ -79,27 +101,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1398" height="118" key="GridCell.Tab.0.bottom" timestamp="1615132131734">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.bottom/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222591" />
-    <state width="1398" height="118" key="GridCell.Tab.0.bottom/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131734" />
-    <state width="1398" height="118" key="GridCell.Tab.0.center" timestamp="1615132131727">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.center/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222589" />
-    <state width="1398" height="118" key="GridCell.Tab.0.center/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131727" />
-    <state width="1398" height="118" key="GridCell.Tab.0.left" timestamp="1615132131725">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.left/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222586" />
-    <state width="1398" height="118" key="GridCell.Tab.0.left/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131725" />
-    <state width="1398" height="118" key="GridCell.Tab.0.right" timestamp="1615132131730">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.right/0.0.1440.900/-247.-1080.1920.1080@-247.-1080.1920.1080" timestamp="1615130222590" />
-    <state width="1398" height="118" key="GridCell.Tab.0.right/0.0.1440.900/-247.-1080.1920.1080@0.0.1440.900" timestamp="1615132131730" />
   </component>
 </project>
