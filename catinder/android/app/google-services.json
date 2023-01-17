@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "851259334245",
+    "project_id": "catinder-workshop",
+    "storage_bucket": "catinder-workshop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851259334245:android:b05370da550bffd689f08c",
+        "android_client_info": {
+          "package_name": "com.example.catinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851259334245-bqa8ki4dncqfnmprh6fsk4uhj6dkp6b0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeJ07TAOyzBGAbW75Y-Xuj5tu8PCMHLi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851259334245-bqa8ki4dncqfnmprh6fsk4uhj6dkp6b0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "851259334245-075g3divlkf41s7bhjpiinucqqd9n429.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.catinder"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

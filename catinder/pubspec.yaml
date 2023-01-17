@@ -25,6 +25,10 @@ dependencies:
     sdk: flutter
   swipable_stack: ^2.0.0
   http: ^0.13.0
+  firebase_core: ^2.4.1
+  cloud_firestore: ^4.3.1
+  flutter_riverpod: ^2.1.3
+  riverpod_context: ^0.3.0
 
 dev_dependencies:
   flutter_test:

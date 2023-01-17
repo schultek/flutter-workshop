@@ -1,11 +1,20 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:swipable_stack/swipable_stack.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:riverpod_context/riverpod_context.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(ProviderScope(child: InheritedConsumer(child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     http.get(
-      Uri.parse("https://api.thecatapi.com/v1/images/search?format=json&mime_types=jpg&limit=100"),
+      Uri.parse("https://api.thecatapi.com/v1/images/search?format=json&mime_types=jpg&limit=10"),
       headers: {"x-api-key": "0e9baaca-e7a5-435f-bcef-62505b79f53c"},
     ).then((result) {
       var catImages = jsonDecode(result.body);
@@ -54,13 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
         images = catImages;
       });
     });
+
+    FirebaseFirestore.instance.collection('favs').snapshots().listen((snapshot) {
+      var favs = snapshot.docs.map((d) => d.data()).toList();
+      setState(() {
+        favorites = favs;
+      });
+    });
   }
 
   void favorite(int index) {
+    var image = images[index];
     setState(() {
-      var image = images[index];
       favorites.add(image);
     });
+    FirebaseFirestore.instance.collection('favs').add(image);
   }
 
   @override
