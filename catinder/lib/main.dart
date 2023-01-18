@@ -1,65 +1,50 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:swipable_stack/swipable_stack.dart';
+
+import 'cats_page.dart';
+import 'favorite_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.grey.shade200,
+        primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'Catinder'),
+      home: const MyHomePage(title: 'HI Flutter'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
   final String title;
-  MyHomePage({Key key, this.title}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
-
-  static _MyHomePageState of(BuildContext context) {
-    return context.findAncestorStateOfType();
-  }
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   int pageIndex = 0;
-
-  List images = [];
   List favorites = [];
 
-  @override
-  void initState() {
-    super.initState();
-
-    http.get(
-      Uri.parse("https://api.thecatapi.com/v1/images/search?format=json&mime_types=jpg&limit=100"),
-      headers: {"x-api-key": "0e9baaca-e7a5-435f-bcef-62505b79f53c"},
-    ).then((result) {
-      var catImages = jsonDecode(result.body);
-      setState(() {
-        images = catImages;
-      });
+  void addFavorite(dynamic catImage) {
+    setState(() {
+      favorites.add(catImage);
     });
   }
 
-  void favorite(int index) {
+  void removeFavorite(dynamic catImage) {
     setState(() {
-      var image = images[index];
-      favorites.add(image);
+      favorites.remove(catImage);
     });
   }
 
@@ -69,119 +54,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: pageIndex == 0
-          ? CardStackPage(images)
-          : FavoritesPage(favorites),
+      body: Stack(
+        children: [
+          Offstage(
+            offstage: pageIndex != 0,
+            child: const CatsPage(),
+          ),
+          Offstage(
+            offstage: pageIndex != 1,
+            child: FavoritePage(favorites),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
-        onTap: (index) {
+        onTap: (int index) {
           setState(() {
             pageIndex = index;
           });
         },
-        items: [
+        items: const [
+          // cards
           BottomNavigationBarItem(
             label: "Cats",
             icon: Icon(Icons.style),
           ),
+          // favorites
           BottomNavigationBarItem(
-            label: "Favorites",
+            label: "Favorite",
             icon: Icon(Icons.favorite),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CardStackPage extends StatefulWidget {
-  final List images;
-  CardStackPage(this.images);
-
-  @override
-  State<CardStackPage> createState() => _CardStackPageState();
-}
-
-class _CardStackPageState extends State<CardStackPage> {
-  SwipableStackController controller = SwipableStackController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 600,
-            padding: EdgeInsets.all(20),
-            child: SwipableStack(
-              controller: controller,
-              itemCount: widget.images.length,
-              stackClipBehaviour: Clip.none,
-              builder: (context, props) {
-                var image = widget.images[props.index];
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    image["url"],
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                );
-              },
-              onSwipeCompleted: (index, direction) {
-                if (direction == SwipeDirection.right) {
-                  MyHomePage.of(context).favorite(index);
-                }
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: IconButton(
-                  color: Colors.red,
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    controller.next(swipeDirection: SwipeDirection.left);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: IconButton(
-                  color: Colors.green,
-                  icon: Icon(Icons.check),
-                  onPressed: () {
-                    controller.next(swipeDirection: SwipeDirection.right);
-                  },
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class FavoritesPage extends StatelessWidget {
-  final List favorites;
-  FavoritesPage(this.favorites);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: favorites.map((i) {
-          return Image.network(
-            i["url"],
-            fit: BoxFit.cover,
-          );
-        }).toList(),
       ),
     );
   }
